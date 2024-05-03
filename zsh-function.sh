@@ -7,6 +7,7 @@ function command_not_found_handler {
 	GREEN='\033[0;32m'
 	YELLOW='\033[0;33m'
 	BLUE='\033[0;34m'
+	WHITE='\033[1;37m'  # Adding white color for the password prompt
 	NC='\033[0m'
 
 	if [ $cmd_status -eq 0 ]; then
@@ -18,18 +19,23 @@ function command_not_found_handler {
 			read -r response
 			case $response in
 			[Yy]*)
-				echo -ne "${BLUE}⚡ Installing... ["
-				if eval "$install_command" >/dev/null 2>&1; then
-					local start_time=$(date +%s)
-					while [ $(($(date +%s) - start_time)) -lt 2 ]; do
-						echo -ne "▉"
-						sleep 0.2
-					done
-					echo -e "]${NC}"
-					echo -e "${GREEN}✅ Installation completed successfully!${NC}"
+				sudo -v  # This prompts the user for their sudo password if needed
+				if sudo -n true 2>/dev/null; then  # Check if the password was correctly entered
+					echo -ne "${BLUE}⚡ Installing... ["
+					if eval "$install_command" >/dev/null 2>&1; then
+						local start_time=$(date +%s)
+						while [ $(($(date +%s) - start_time)) -lt 2 ]; do
+							echo -ne "▉"
+							sleep 0.2
+						done
+						echo -e "]${NC}"
+						echo -e "${GREEN}✅ Installation completed successfully!${NC}"
+					else
+						echo -e "]${NC}"
+						echo -e "${RED}❌ Installation failed. Please check the error messages above.${NC}"
+					fi
 				else
-					echo -e "]${NC}"
-					echo -e "${RED}❌ Installation failed. Please check the error messages above.${NC}"
+					echo -e "${RED}❌ Incorrect password or insufficient permissions.${NC}"
 				fi
 				;;
 			*)
