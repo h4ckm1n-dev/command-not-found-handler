@@ -65,7 +65,7 @@ EOF
 ## Bash
 
 ```bash
-cat << 'EOF' >> ~/.zshrc
+cat << 'EOF' >> ~/.bashrc
 # Add command_not_found_handler function
 function command_not_found_handler {
     local output=$(/usr/lib/command-not-found -- "$1" 2>&1)
