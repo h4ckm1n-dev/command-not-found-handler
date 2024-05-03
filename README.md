@@ -115,7 +115,7 @@ function command_not_found_handler {
 }
 EOF
 ```
-Restart your shell or run source ~/.zshrc to apply the changes.
+Restart your shell or run 'source ~/.zshrc' ro 'source ~/.bashrc' to apply the changes.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
