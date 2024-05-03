@@ -27,6 +27,7 @@ function command_not_found_handler {
 	if [ $cmd_status -eq 0 ]; then
 		echo -e "${NC}$output${NC}"
 		local install_command=$(echo "$output" | grep -oE 'sudo (apt install|snap install) [a-zA-Z0-9\-]+')
+        local package_name=$(echo "$install_command" | grep -oE '[a-zA-Z0-9\-]+$')
 
 		if [[ -n "$install_command" ]]; then
 			echo -en "${YELLOW}🔍 Do you want to execute: 📦 ${RED}$install_command${YELLOW} (y/N) ${NC}"
@@ -35,7 +36,7 @@ function command_not_found_handler {
 			[Yy]*)
 				sudo -v  # This prompts the user for their sudo password if needed
 				if sudo -n true 2>/dev/null; then  # Check if the password was correctly entered
-					echo -ne "${BLUE}⚡ Installing... ["
+					echo -ne "${BLUE}⚡ Installing $package_name... ["
 					if eval "$install_command" >/dev/null 2>&1; then
 						local start_time=$(date +%s)
 						while [ $(($(date +%s) - start_time)) -lt 2 ]; do
