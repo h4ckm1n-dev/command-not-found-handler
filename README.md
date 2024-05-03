@@ -51,7 +51,7 @@ function command_not_found_handler {
                     ;;
             esac
         else
-            echo -e "${RED}🔍 Package not found!${NC}"
+            echo -e "${RED}📦 Package not found!${NC}"
         fi
     else
         echo -e "${RED}$output${NC}"
@@ -65,4 +65,5 @@ EOF
 Restart your shell or run `source ~/.zshrc` to apply the changes.
 
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
