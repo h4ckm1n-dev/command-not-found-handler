@@ -1,5 +1,7 @@
 # Zsh Command Not Found Handler
 
+![image](https://github.com/h4ckm1n-dev/ubuntu-zsh-autoinstall/assets/97511408/f2c17990-5355-4a23-821e-7dfe4ecb69d2)
+
 This script adds a custom command_not_found_handler function to your `.zshrc` file. When you try to execute a command that is not found, it will provide suggestions for installing the package that contains that command (if available).
 
 ## Usage
