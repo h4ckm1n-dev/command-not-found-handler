@@ -47,7 +47,7 @@ function command_not_found_handler {
 			echo -e "${RED}📦 Package not found!${NC}"
 		fi
 	else
-		echo -e "${RED}$output${NC}"
+	echo -e "${RED}$output${NC}"
 	fi
 
 	return $cmd_status
